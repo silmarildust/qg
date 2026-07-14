@@ -1,0 +1,58 @@
+/tmp/lock-gpu3:
+
+/tmp/lock-gpu7:
+Git hash info: {'branch': 'no-branch', 'commit': 'no-git', 'describe': ''}
+Successfully loaded configuration from Config.Run03672
+2026-07-10 12:02:38
+forcing:
+    A = -1.5
+    B = 2
+    C = 0
+    D = 1.5
+    E = 2
+    F = 0
+    dynamic = True
+    option = 1
+grid:
+    Lx = 6.283185307179586
+    Ly = 6.283185307179586
+    Nx = 1024
+    Ny = 1024
+ic:
+    energy = 0.01
+    option = 1
+    seed = 27
+    wavenumbers = [3.0, 5.0]
+mask:
+    option = 1
+    r = 0.0
+    tol = 0.001
+    x_center = 0.25
+    y_center = 0.5
+pde:
+    B = 5
+    closure_option = None
+    mu = 0.1
+    nu = 4e-05
+    nv = 1
+    penalty_coeff = 6.25e-05
+run_number = 3672
+sponge:
+    option = 0
+    tol = 0.001
+    x_left = 0.1
+    x_right = 0.9
+    y_bottom = None
+    y_top = None
+time:
+    T = 75.00005
+    dt = 5e-05
+    save_int = 2048
+Successfully loaded derivatives and operators
+2026-07-10 12:02:45
+Using wavenumber ICs
+Using circular mask
+Successfully created initial conditions and obstacles
+2026-07-10 12:02:47
+Using dynamic forcing
+Using cos forcing

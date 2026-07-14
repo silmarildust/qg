@@ -1,0 +1,21 @@
+#!/bin/sh
+#$ -cwd
+#$ -V
+#$ -j y
+#$ -S /bin/sh
+#$ -l h_core=0
+#$ -q ibgpu.q
+#$ -l gpu=1
+#$ -o /gdata/Results/mjmvega/QG/Logs/QGJob$JOB_ID.log
+#$ -M mjmvega@mit.edu
+#$ -m ea
+
+set -e
+
+runnum=$1
+
+ls /tmp/lock-gpu*
+
+cd "$RUN_DIR/Driver/" || { echo "Driver folder not found"; exit 3; }
+
+python -u driver_qg.py --run_num "${runnum}"
