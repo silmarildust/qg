@@ -108,6 +108,15 @@ elif config.params.mask.option == 2:
                                               config.params.mask.y_center, config.params.mask.y_width, 
                                               config.params.mask.x_left, config.params.mask.x_right, 
                                               config.params.mask.x_scale, config.params.mask.y_scale, config.params.mask.tol)
+
+elif config.params.mask.option == 3:
+    print("Using boundary mask")
+    from Masks.masks import create_boundary_mask
+    obstacle_mask_DNS = create_boundary_mask(grid_DNS, config.params.mask.width)
+
+else:
+    raise ValueError("Invalid mask option. Check config.")
+
 else:
     raise ValueError("Invalid mask option. Check config.")
 

@@ -43,7 +43,10 @@ class ic_params:
         Ny = 1024
     
 class mask_params:
-    option = 1 # 1 is circular mask
+    option = 3      # Boundary mask
+    width = 0.025   # 2.5% of the domain
+    # option = 1 
+    # 1 is circular mask
     r = 0.0
     x_center = 0.25
     y_center =0.5
