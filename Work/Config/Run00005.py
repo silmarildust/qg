@@ -50,13 +50,13 @@ class mask_params:
     tol = 1e-3
     
 class forcing_params:
-    option = 1 # 1 is cos forcing
+    option = 1 # 1 is sin forcing
     dynamic = True  # Constant enstrophy injection
-    A=-1.5 # A cos(B x+ Ct) + D (cos E y + Ft)
-    B=4
+    A=-1.5 # A sin(x/B + Ct) + D sin(y/E + Ft)
+    B=2
     C=0
     D=1.5
-    E=4
+    E=2
     F=0
 
 class sponge_params:

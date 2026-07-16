@@ -19,13 +19,13 @@ def cos_forcing(grid,spectral_derivative,forcing_params,t, qh=None):
     
     if forcing_params.dynamic:
         # Dynamic flag ensures constant enstrophy injection \int (q * F) = A
-        w =  torch.tensor(-(torch.sin(forcing_params.B * X + forcing_params.C * t)) + (torch.sin(forcing_params.E * Y + forcing_params.F * t)))
+        w = (-torch.sin(X / forcing_params.B + forcing_params.C * t) + torch.sin(Y / forcing_params.E + forcing_params.F * t))
         wh = to_spectral(w)
         wh_enstrophy = int_cross_sq(wh,qh, grid) / (grid.Lx * grid.Ly)
         eps = 1e-12
         wh = forcing_params.D*wh/(wh_enstrophy + torch.sign(wh_enstrophy) * eps)
     else:
-        w =  forcing_params.A * (torch.sin(forcing_params.B * X + forcing_params.C * t)) + forcing_params.D * (torch.sin(forcing_params.E * Y + forcing_params.F * t))
+        w = (forcing_params.A * torch.sin(X / forcing_params.B + forcing_params.C * t) + forcing_params.D * torch.sin(Y / forcing_params.E + forcing_params.F * t))
         wh = to_spectral(w)
     
     return dealias(wh,spectral_derivative,1/3)
