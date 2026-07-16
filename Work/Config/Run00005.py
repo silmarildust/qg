@@ -31,7 +31,7 @@ class ic_params:
     option = 1 # QG ICs
     seed= 27
     if option == 1:  #QG ICs
-        energy= 0.01
+        energy= 0.0
         wavenumbers= [3.0, 5.0]
     if option == 2: #FPC ICs
         init_vel =-2
@@ -55,7 +55,7 @@ class mask_params:
 class forcing_params:
     option = 1 # 1 is sin forcing
     dynamic = True  # Constant enstrophy injection
-    A=-1.5 # A sin(x/B + Ct) + D sin(y/E + Ft)
+    A=0 # A sin(x/B + Ct) + D sin(y/E + Ft)
     B=2
     C=0
     D=1.5
