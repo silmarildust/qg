@@ -117,9 +117,6 @@ elif config.params.mask.option == 3:
 else:
     raise ValueError("Invalid mask option. Check config.")
 
-else:
-    raise ValueError("Invalid mask option. Check config.")
-
 print(f"Successfully created initial conditions and obstacles")
 now = datetime.datetime.now()
 print(now.strftime("%Y-%m-%d %H:%M:%S"))
