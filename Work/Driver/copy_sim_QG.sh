@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-RUNID_START=4  # Start value for runid (trained model num)
-RUNID_END=4  # End value for runid
+RUNID_START=5  # Start value for runid (trained model num)
+RUNID_END=5  # End value for runid
 
 BASE_DIR="/home/mjmvega/Codes/QG/Work/"  # Where to copy code from
 RESULTS_ROOT="/gdata/Results/mjmvega/QG/" #Results directory
