@@ -301,7 +301,7 @@ def create_boundary_mask(grid, width=0.025):
     wx = width * Lx
     wy = width * Ly
 
-    mask = torch.zeros((Ny, Nx), device=grid.device)
+    mask = torch.zeros_like(X, dtype=torch.float32,device=grid.device)
 
     mask[X < wx] = 1          # left
     mask[X > Lx - wx] = 1     # right
