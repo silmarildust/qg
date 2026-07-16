@@ -298,6 +298,10 @@ def create_boundary_mask(grid, width=0.025):
     X = x[None, :]
     Y = y[:, None]
 
+    # Create meshgrid for x, y
+    X = x.unsqueeze(0).expand(Ny, Nx)
+    Y = y.unsqueeze(1).expand(Ny, Nx)
+
     wx = width * Lx
     wy = width * Ly
 
