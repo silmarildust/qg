@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-RUNID_START=10  # Start value for runid (trained model num)
+RUNID_START=6  # Start value for runid (trained model num)
 RUNID_END=10  # End value for runid
 
 BASE_DIR="/home/mjmvega/Codes/QG/Work/"  # Where to copy code from

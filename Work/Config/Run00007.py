@@ -54,7 +54,7 @@ class mask_params:
     
 class forcing_params:
     option = 1 # 1 is sin forcing
-    dynamic = True  # Constant enstrophy injection
+    dynamic = False  # Constant enstrophy injection
     A=0 # A sin(x/B + Ct) + D sin(y/E + Ft)
     B=2
     C=0
