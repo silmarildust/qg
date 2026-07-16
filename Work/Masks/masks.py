@@ -276,3 +276,36 @@ def create_sponge(grid, x_right,  x_left, y_top, y_bottom, tolerance=1e-3):
 
     # Finally clamp to [0,1] to guard against any tiny numerical overshoot
     return mask.clamp(0.0, 1.0)
+
+def create_boundary_mask(grid, width=0.025):
+    """
+    Binary boundary mask.
+
+    Boundary = 1
+    Interior = 0
+
+    width is given as a fraction of the domain length.
+    """
+
+    Lx = grid.Lx
+    Ly = grid.Ly
+    Nx = grid.Nx
+    Ny = grid.Ny
+
+    x = torch.linspace(0, Lx, Nx, device=grid.device)
+    y = torch.linspace(0, Ly, Ny, device=grid.device)
+
+    X = x[None, :]
+    Y = y[:, None]
+
+    wx = width * Lx
+    wy = width * Ly
+
+    mask = torch.zeros((Ny, Nx), device=grid.device)
+
+    mask[X < wx] = 1          # left
+    mask[X > Lx - wx] = 1     # right
+    mask[Y < wy] = 1          # bottom
+    mask[Y > Ly - wy] = 1     # top
+
+    return mask
