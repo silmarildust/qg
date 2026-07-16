@@ -13,7 +13,7 @@ class time_params:
     
 class pde_params:
     mu = 0.1  #(Linear drag)
-    nu = 4e-5 #(Viscosity coefficient)
+    nu = 4e-3 #(Viscosity coefficient)
     B = 10 #(Beta plane)
     nv = 1 #(Hyperviscous order)
     penalty_coeff=1.25*time_params.dt  # (Brinkman penalty parameter)
@@ -78,4 +78,4 @@ class params:
     mask = mask_params
     forcing = forcing_params
     sponge=sponge_params
-    run_number = 5
+    run_number = 3589

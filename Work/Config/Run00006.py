@@ -1,8 +1,8 @@
 import math
 
 class grid_params:
-    Nx= 1024
-    Ny= 1024
+    Nx= 512
+    Ny= 512
     Lx= 2*math.pi
     Ly= 2*math.pi
     
@@ -39,8 +39,8 @@ class ic_params:
         file_path = f'/gdata/projects/ml_scope/Turbulence/QG_V0003/Results/Run03517/fields_Run03517.npy'
         start_time = 101
         scale = 8
-        Nx = 1024
-        Ny = 1024
+        Nx = 512
+        Ny = 512
     
 class mask_params:
     option = 3      # Boundary mask
@@ -78,4 +78,4 @@ class params:
     mask = mask_params
     forcing = forcing_params
     sponge=sponge_params
-    run_number = 5
+    run_number = 3589
