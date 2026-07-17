@@ -277,46 +277,46 @@ def create_sponge(grid, x_right,  x_left, y_top, y_bottom, tolerance=1e-3):
     # Finally clamp to [0,1] to guard against any tiny numerical overshoot
     return mask.clamp(0.0, 1.0)
 
-def create_boundary_mask(grid, width=0.0, tolerance=1e-3):
-    """
-    Binary boundary mask.
+def create_boundary_mask(grid, width=0.025, tolerance=1e-3):
+    """
+    Binary boundary mask.
 
-    Boundary = 1
-    Interior = 0
+    Boundary = 1
+    Interior = 0
 
-    width is given as a fraction of the domain length.
-    """
+    width is given as a fraction of the domain length.
+    """
 
-    Lx = grid.Lx
-    Ly = grid.Ly
-    Nx = grid.Nx
-    Ny = grid.Ny
+    Lx = grid.Lx
+    Ly = grid.Ly
+    Nx = grid.Nx
+    Ny = grid.Ny
 
-    x = torch.linspace(0, Lx, Nx, device=grid.device)
-    y = torch.linspace(0, Ly, Ny, device=grid.device)
+    x = torch.linspace(0, Lx, Nx, device=grid.device)
+    y = torch.linspace(0, Ly, Ny, device=grid.device)
 
-    X = x[None, :]
-    Y = y[:, None]
+    X = x[None, :]
+    Y = y[:, None]
 
-    # Create meshgrid for x, y
-    X = x.unsqueeze(0).expand(Ny, Nx)
-    Y = y.unsqueeze(1).expand(Ny, Nx)
+    # Create meshgrid for x, y
+    X = x.unsqueeze(0).expand(Ny, Nx)
+    Y = y.unsqueeze(1).expand(Ny, Nx)
 
-    wx = width * Lx
-    wy = width * Ly
+    wx = width * Lx
+    wy = width * Ly
 
-    mask = torch.zeros_like(X, dtype=torch.float32,device=grid.device)
+    mask = torch.zeros_like(X, dtype=torch.float32,device=grid.device)
 
-    # mask[X < wx] = 1          
+    # mask[X < wx] = 1          
 # left
-    # mask[X > Lx - wx] = 1     
+    # mask[X > Lx - wx] = 1     
 # right
-    mask[Y < wy] = 1          # bottom
-    mask[Y > Ly - wy] = 1     # top
+    mask[Y < wy] = 1          # bottom
+    mask[Y > Ly - wy] = 1     # top
 
-    # mask[(X >= wx) & (X < wx + tolerance)] = 0.5
-    # mask[(X <= Lx - wx) & (X > Lx - wx - tolerance)] = 0.5
-    mask[(Y >= wy) & (Y < wy + tolerance)] = 0.5
-    mask[(Y <= Ly - wy) & (Y > Ly - wy - tolerance)] = 0.5
+    # mask[(X >= wx) & (X < wx + tolerance)] = 0.5
+    # mask[(X <= Lx - wx) & (X > Lx - wx - tolerance)] = 0.5
+    mask[(Y >= wy) & (Y < wy + tolerance)] = 0.5
+    mask[(Y <= Ly - wy) & (Y > Ly - wy - tolerance)] = 0.5
 
-    return mask
+    return mask
