@@ -36,7 +36,7 @@ parser.add_argument('--run_num', type=int, help='Run number for configuration fi
 args = parser.parse_args()
 run_number = args.run_num
 
-sys_dir=f'/gdata/Results/mjmvega/Run{run_number:05d}/'
+sys_dir=f'/gdata/Results/mjmvega/QG/Run{run_number:05d}/'
 sys.path.append(os.path.join(sys_dir, "Code"))
 
 ## Load config file
