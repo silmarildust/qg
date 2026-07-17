@@ -277,7 +277,7 @@ def create_sponge(grid, x_right,  x_left, y_top, y_bottom, tolerance=1e-3):
     # Finally clamp to [0,1] to guard against any tiny numerical overshoot
     return mask.clamp(0.0, 1.0)
 
-def create_boundary_mask(grid, width=0.025):
+def create_boundary_mask(grid, width=0.0, tolerance=1e-3):
     """
     Binary boundary mask.
 
@@ -311,5 +311,10 @@ def create_boundary_mask(grid, width=0.025):
     mask[X > Lx - wx] = 1     # right
     mask[Y < wy] = 1          # bottom
     mask[Y > Ly - wy] = 1     # top
+
+    mask[(X >= wx) & (X < wx + tolerance)] = 0.5
+    mask[(X <= Lx - wx) & (X > Lx - wx - tolerance)] = 0.5
+    mask[(Y >= wy) & (Y < wy + tolerance)] = 0.5
+    mask[(Y <= Ly - wy) & (Y > Ly - wy - tolerance)] = 0.5
 
     return mask
