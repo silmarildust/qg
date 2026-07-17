@@ -36,7 +36,7 @@ parser.add_argument('--run_num', type=int, help='Run number for configuration fi
 args = parser.parse_args()
 run_number = args.run_num
 
-sys_dir=f'/gdata/Results/mjmvega/QG/Run{run_number:05d}/'
+sys_dir=f'/gdata/projects/ml_scope/Turbulence/QG_V0003/Results/Run{run_number:05d}/'
 sys.path.append(os.path.join(sys_dir, "Code"))
 
 ## Load config file
@@ -108,12 +108,10 @@ elif config.params.mask.option == 2:
                                               config.params.mask.y_center, config.params.mask.y_width, 
                                               config.params.mask.x_left, config.params.mask.x_right, 
                                               config.params.mask.x_scale, config.params.mask.y_scale, config.params.mask.tol)
-
 elif config.params.mask.option == 3:
-    print("Using boundary mask")
-    from Masks.masks import create_boundary_mask
-    obstacle_mask_DNS = create_boundary_mask(grid_DNS, config.params.mask.width)
-
+    print(f"Using boundary mask")
+    from Masks.masks import  create_boundary_mask
+    obstacle_mask_DNS =   create_boundary_mask(grid_DNS,config.params.mask.width, config.params.mask.tol)
 else:
     raise ValueError("Invalid mask option. Check config.")
 
@@ -132,6 +130,10 @@ if config.params.forcing.option ==1:
     print(f"Using cos forcing")
     from Initial_forcing.forcing import cos_forcing
     forcing_DNS = cos_forcing
+elif config.params.forcing.option ==2:
+    print(f"Using sin forcing")
+    from Initial_forcing.forcing import sin_forcing
+    forcing_DNS = sin_forcing
 elif config.params.forcing.option ==0:
     forcing_DNS = None
     config.params.forcing=None
