@@ -78,4 +78,4 @@ class params:
     mask = mask_params
     forcing = forcing_params
     sponge=sponge_params
-    run_number = 3589
+    run_number = 8
