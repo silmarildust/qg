@@ -278,15 +278,6 @@ def create_sponge(grid, x_right,  x_left, y_top, y_bottom, tolerance=1e-3):
     return mask.clamp(0.0, 1.0)
 
 def create_boundary_mask(grid, width=0.025, tolerance=1e-3):
-    """
-    Binary boundary mask.
-
-    Boundary = 1
-    Interior = 0
-
-    width is given as a fraction of the domain length.
-    """
-
     Lx = grid.Lx
     Ly = grid.Ly
     Nx = grid.Nx
