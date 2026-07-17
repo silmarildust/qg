@@ -307,13 +307,13 @@ def create_boundary_mask(grid, width=0.0, tolerance=1e-3):
 
     mask = torch.zeros_like(X, dtype=torch.float32,device=grid.device)
 
-    mask[X < wx] = 1          # left
-    mask[X > Lx - wx] = 1     # right
+    # mask[X < wx] = 1          # left
+    # mask[X > Lx - wx] = 1     # right
     mask[Y < wy] = 1          # bottom
     mask[Y > Ly - wy] = 1     # top
 
-    mask[(X >= wx) & (X < wx + tolerance)] = 0.5
-    mask[(X <= Lx - wx) & (X > Lx - wx - tolerance)] = 0.5
+    # mask[(X >= wx) & (X < wx + tolerance)] = 0.5
+    # mask[(X <= Lx - wx) & (X > Lx - wx - tolerance)] = 0.5
     mask[(Y >= wy) & (Y < wy + tolerance)] = 0.5
     mask[(Y <= Ly - wy) & (Y > Ly - wy - tolerance)] = 0.5
 
