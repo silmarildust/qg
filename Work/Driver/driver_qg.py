@@ -120,25 +120,33 @@ now = datetime.datetime.now()
 print(now.strftime("%Y-%m-%d %H:%M:%S"))
 
 ## Set-up forcing
-config.params.forcing.dynamic = getattr(config.params.forcing, 'dynamic', False) # Default case is not dynamic
+config.params.forcing.dynamic = getattr(config.params.forcing, 'dynamic', False)  # Default case is not dynamic
 if config.params.forcing.dynamic:
-    print(f"Using dynamic forcing")
+    print("Using dynamic forcing")
 else:
-    print(f"Not using dynamic forcing")
+    print("Not using dynamic forcing")
 
-if config.params.forcing.option ==1:
-    print(f"Using cos forcing")
+if config.params.forcing.option == 1:
+    print("Using cos forcing")
     from Initial_forcing.forcing import cos_forcing
     forcing_DNS = cos_forcing
-elif config.params.forcing.option ==2:
-    print(f"Using sin forcing")
+
+elif config.params.forcing.option == 2:
+    print("Using sin forcing")
     from Initial_forcing.forcing import sin_forcing
     forcing_DNS = sin_forcing
-elif config.params.forcing.option ==0:
+
+elif config.params.forcing.option == 3:
+    print("Using piecewise forcing")
+    from Initial_forcing.forcing import piecewise_forcing
+    forcing_DNS = piecewise_forcing
+
+elif config.params.forcing.option == 0:
     forcing_DNS = None
-    config.params.forcing=None
+    config.params.forcing = None
+
 else:
-    raise ValueError("Invalid forcing option. Check config.")
+    raise ValueError(f"Invalid forcing option ({config.params.forcing.option}). Check config.")
     
 ## Set-up sponging
 if config.params.sponge.option ==1:
