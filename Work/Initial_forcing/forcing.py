@@ -56,3 +56,45 @@ def sin_forcing(grid,spectral_derivative,forcing_params,t, qh=None):
         wh = to_spectral(w)
     
     return dealias(wh,spectral_derivative,1/3)
+
+def piecewise_forcing(grid, spectral_derivative, forcing_params, t=None, qh=None):
+    """
+    Generates the piecewise forcing
+
+                  -tau0 * 2pi/(0.9 Ly) * sin(pi y / g(x))           , y < g(x)
+    F(x,y) =
+                   tau0 * 2pi/(0.9 Ly) * sin(pi(y-g(x))/(Ly-g(x)))  , y >= g(x)
+
+    where
+
+        g(x) = Lx/2 + 0.2(x - Lx/2)
+    """
+
+    x = torch.linspace(0, grid.Lx, grid.Nx, device=grid.device)
+    y = torch.linspace(0, grid.Ly, grid.Ny, device=grid.device)
+
+    X, Y = x[None, :], y[:, None]
+
+    # g(x)
+    gx = grid.Lx / 2 + 0.2 * (X - grid.Lx / 2)
+
+    eps = 1e-12
+    gx = torch.clamp(gx, eps, grid.Ly - eps)
+
+    amp = forcing_params.tau0 * (2 * np.pi) / (0.9 * grid.Ly)
+
+    w = torch.where(
+        Y < gx,
+        -amp * torch.sin(np.pi * Y / gx),
+        amp * torch.sin(np.pi * (Y - gx) / (grid.Ly - gx))
+    )
+
+    if forcing_params.dynamic:
+        wh = to_spectral(w)
+        wh_enstrophy = int_cross_sq(wh, qh, grid) / (grid.Lx * grid.Ly)
+
+        wh = wh / (wh_enstrophy + torch.sign(wh_enstrophy) * eps)
+    else:
+        wh = to_spectral(w)
+
+    return dealias(wh, spectral_derivative, 1/3)
